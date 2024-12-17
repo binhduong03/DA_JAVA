@@ -1,7 +1,10 @@
+<%@page import="model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%
+    User user = (User) session.getAttribute("data"); 
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/backend/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/backend/plugins/feather/feather.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/backend/plugins/icons/flags/flags.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/public/backend/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/backend/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/backend/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/backend/plugins/datatables/datatables.min.css">
@@ -166,25 +170,15 @@
                             <img class="rounded-circle" src="${pageContext.request.contextPath}/public/backend/img/profiles/avatar-01.jpg" width="31"
                                 alt="Soeng Souy">
                             <div class="user-text">
-                                <h6>Soeng Souy</h6>
+                                <h6><%= user.getFullname() %></h6>
                                 <p class="text-muted mb-0">Administrator</p>
                             </div>
                         </span>
                     </a>
                     <div class="dropdown-menu">
-                        <div class="user-header">
-                            <div class="avatar avatar-sm">
-                                <img src="${pageContext.request.contextPath}/public/backend/img/profiles/avatar-01.jpg" alt="User Image"
-                                    class="avatar-img rounded-circle">
-                            </div>
-                            <div class="user-text">
-                                <h6>Soeng Souy</h6>
-                                <p class="text-muted mb-0">Administrator</p>
-                            </div>
-                        </div>
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="inbox.html">Inbox</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="profile.html">Thông tin cá nhân</a>
+                        <a class="dropdown-item" href="inbox.html">Tin nhắn</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/login">Đăng xuất</a>
                     </div>
                 </li>
 
@@ -209,54 +203,45 @@
                                 <li><a href="student-dashboard.html">Student Dashboard</a></li>
                             </ul>
                         </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fas fa-graduation-cap"></i> <span> Students</span> <span
+                        <li class="submenu  ">
+                            <a href="#"><i class="fas fa-graduation-cap"></i> <span>Học viên</span> <span
                                     class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="students.html">Student List</a></li>
-                                <li><a href="student-details.html">Student View</a></li>
-                                <li><a href="add-student.html">Student Add</a></li>
-                                <li><a href="edit-student.html">Student Edit</a></li>
+                                <li><a href="all-student">Danh sách học viên</a></li>
+                                <li><a href="add-student">Thêm mới học viên</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Giáo viên</span> <span
                                     class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="${pageContext.request.contextPath}/Admin/all-teacher">Teacher List</a></li>
-                                <li><a href="teacher-details.html">Teacher View</a></li>
-                                <li><a href="${pageContext.request.contextPath}/Admin/add-teacher"">Teacher Add</a></li>
-                                <li><a href="edit-teacher.html">Teacher Edit</a></li>
+                                <li><a href="all-teacher">Danh sách giáo viên</a></li>    
+                                <li><a href="add-teacher"">Thêm mới giáo viên</a></li> 
+                            </ul>
+                        </li>
+                        
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-book-reader"></i> <span> Khóa học</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="all-courses">Danh sách khóa học</a></li>
+                                <li><a href="add-course">Thêm khóa học</a></li>
+                                
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-building"></i> <span> Departments</span> <span
+                            <a href="#"><i class="fas fa-building"></i> <span> Chương</span> <span
                                     class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="departments.html">Department List</a></li>
-                                <li><a href="add-department.html">Department Add</a></li>
-                                <li><a href="edit-department.html">Department Edit</a></li>
+                                <li><a href="course-chapter">Danh sách chương theo khóa học</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="fas fa-book-reader"></i> <span> Subjects</span> <span
+                            <a href="#"><i class="fas fa-clipboard"></i> <span>Tài liệu, bài tập</span> <span
                                     class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="subjects.html">Subject List</a></li>
-                                <li><a href="add-subject.html">Subject Add</a></li>
-                                <li><a href="edit-subject.html">Subject Edit</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fas fa-clipboard"></i> <span> Invoices</span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="invoices.html">Invoices List</a></li>
-                                <li><a href="invoice-grid.html">Invoices Grid</a></li>
-                                <li><a href="add-invoice.html">Add Invoices</a></li>
-                                <li><a href="edit-invoice.html">Edit Invoices</a></li>
-                                <li><a href="view-invoice.html">Invoices Details</a></li>
-                                <li><a href="invoices-settings.html">Invoices Settings</a></li>
+                            	<li><a href="course-lecture">Bài giảng theo khóa học</a></li>
+                                <li><a href="course-exercise">Bài tập theo khóa học</a></li>
                             </ul>
                         </li>
                         <li class="menu-title">
@@ -481,6 +466,8 @@
     <script src="${pageContext.request.contextPath}/public/backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/public/backend/js/feather.min.js"></script>
     <script src="${pageContext.request.contextPath}/public/backend/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+     <script src="${pageContext.request.contextPath}/public/backend/plugins/moment/moment.min.js"></script>
+    <script src="${pageContext.request.contextPath}/public/backend/js/bootstrap-datetimepicker.min.js"></script>
     <script src="${pageContext.request.contextPath}/public/backend/plugins/datatables/datatables.min.js"></script>
     <script src="${pageContext.request.contextPath}/public/backend/plugins/apexchart/apexcharts.min.js"></script>
     <script src="${pageContext.request.contextPath}/public/backend/plugins/apexchart/chart-data.js"></script>

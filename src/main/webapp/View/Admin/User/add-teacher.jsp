@@ -66,7 +66,7 @@
                             <div class="col-12 col-sm-4">
                                 <div class="form-group local-forms">
                                     <label>Số điện thoại <span class="login-danger">*</span></label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Nhập số điện thoại">
+                                    <input type="number" name="phone" class="form-control" placeholder="Nhập số điện thoại">
                                 </div>
                             </div>
 

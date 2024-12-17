@@ -14,7 +14,7 @@ public class User {
 	private Date date_of_birt;
 	private String address;
 	private String role;
-	private boolean status;
+	private int status;
 	private Date created_at;
 	private Date updated_at;
 	
@@ -22,7 +22,7 @@ public class User {
 	}
 
 	public User(int user_id, String fullname, String username, String password, String avatar, String phone,
-			String email, String gender, Date date_of_birt, String address, String role, boolean status,
+			String email, String gender, Date date_of_birt, String address, String role, int status,
 			Date created_at, Date updated_at) {
 	
 		this.user_id = user_id;
@@ -129,11 +129,11 @@ public class User {
 		this.role = role;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

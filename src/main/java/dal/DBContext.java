@@ -9,7 +9,7 @@ public class DBContext {
 	protected static Connection connection;
 	
 	public static Connection getConnection() throws SQLException {
-		String db = "jdbc:mysql://localhost:3306/quanlykh";
+		String db = "jdbc:mysql://localhost:3306/dajava";
 		String userName = "root";
 		String passWord = "";
 		

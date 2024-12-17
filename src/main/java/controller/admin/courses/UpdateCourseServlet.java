@@ -1,0 +1,115 @@
+package controller.admin.courses;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import model.Course;
+import model.User;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
+
+import dal.CourseDAO;
+import dal.UserDAO;
+
+/**
+ * Servlet implementation class UpdateCourseServlet
+ */
+@MultipartConfig
+public class UpdateCourseServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateCourseServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id_s = request.getParameter("id");
+		int id = Integer.parseInt(id_s);
+		CourseDAO cr = new CourseDAO();
+		Course c = cr.getCourseById(id);
+		request.setAttribute("course", c);
+		
+		UserDAO us = new UserDAO();
+		List<User> users = us.allTeacher();
+		request.setAttribute("users", users);
+
+		request.setAttribute("bodyPage", "/View/Admin/Course/edit-course.jsp");
+		request.getRequestDispatcher("/View/Admin/admin.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		CourseDAO c = new CourseDAO();
+		Date currentDate = new Date(System.currentTimeMillis());
+		String id_s = request.getParameter("id");
+		String user_id = request.getParameter("user_id");
+		String name = request.getParameter("name");
+		String image_old = request.getParameter("image_old");
+		String description = request.getParameter("description");
+		String price = request.getParameter("price");
+		String duration = request.getParameter("duration");
+//		String created_at = request.getParameter("created_at");
+		int id = Integer.parseInt(id_s);
+		int UserID = Integer.parseInt(user_id);
+		int Duration = Integer.parseInt(duration);
+		double Price = Double.parseDouble(price);
+        Part imagePart = request.getPart("image");
+        String image = null;
+        String uploadPath = null;
+
+        if (imagePart != null && imagePart.getSize() > 0) {
+            // Đổi tên file với thời gian hiện tại để tránh trùng lặp
+            String filename = imagePart.getSubmittedFileName();
+            image = System.currentTimeMillis() + "_" + filename;
+
+            // Đường dẫn lưu file
+            // Chỉnh sửa đường dẫn: 
+            uploadPath = "C:D:/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/img/course";
+            //Dương: D:/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/img/user
+		    //Giang: C:/Users/ADMIN/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/img/course
+            
+            // Đảm bảo thư mục lưu file tồn tại
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();  // Tạo thư mục nếu chưa có
+            }
+
+            // Lưu file vào thư mục đích
+            imagePart.write(uploadPath + File.separator + image);
+        }else {
+		    image = image_old; 
+		}
+        
+        User user = new User();
+        user.setUser_id(UserID); 
+//        
+//    	System.out.println(user);
+//		System.out.println(name);
+//		System.out.println(uploadPath);
+//		System.out.println(description);
+//		System.out.println(Price);
+//		System.out.println(Duration);
+
+		Course course =  new Course(id, user, name, image, description, Price, Duration, 1, currentDate, currentDate);
+		c.update(course);    
+		response.sendRedirect("all-courses");
+	}
+
+}

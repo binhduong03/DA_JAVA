@@ -86,7 +86,7 @@ public class AddTeacherServlet extends HttpServlet {
             avatarPart.write(uploadPath + File.separator + avatar);
         }
 		
-		User user =  new User(0, fullname, username, password, avatar, phone, email, gender, birthDate, address, role, true, currentDate, currentDate);
+		User user =  new User(0, fullname, username, password, avatar, phone, email, gender, birthDate, address, role, 1, currentDate, currentDate);
 		us.insert(user);    
 		response.sendRedirect("all-teacher");
 	}
