@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.Chapter;
 import model.Course;
+import model.Lecture;
 
 
 public class ChapterDAO extends DBContext{
@@ -137,7 +138,6 @@ public class ChapterDAO extends DBContext{
 				
 				CourseDAO c = new CourseDAO();
 				Course course = c.getCourseById(courseId);
-				
 				//Tạo đối tượng chương
 				Chapter chapter = new Chapter(chapter_id, title, content, course, created_at, updated_at);
 				chapters.add(chapter);
@@ -147,6 +147,4 @@ public class ChapterDAO extends DBContext{
 		}
 		return chapters;
 	}
-
-	
 }

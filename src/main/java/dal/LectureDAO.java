@@ -175,8 +175,46 @@ public class LectureDAO extends DBContext{
 			e.printStackTrace();
 		}
 		return lectures;
-		
 	}
 	
-
+	public List<Lecture> getLectureChapterbyId(int chapter_id){
+		List<Lecture> lectures = new ArrayList<>();
+		String sql = "SELECT l.lecture_id, " +
+	             "l.chapter_id, " +
+	             "l.title, " +
+	             "l.content, " +
+	             "l.media_type, " +
+	             "l.media_url, " +
+	             "l.order, " +
+	             "l.status, " +
+	             "l.created_at, " +
+	             "l.updated_at " + 
+	             "FROM tb_lectures l " +
+	             "LEFT JOIN tb_chapters c ON l.chapter_id = c.chapter_id " +
+	             "WHERE l.chapter_id = ?";
+		try {
+			connection = getConnection();
+			PreparedStatement p = connection.prepareStatement(sql);
+			p.setInt(1, chapter_id);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()) {
+				int lecture_id = rs.getInt("lecture_id");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				String media_type = rs.getString("media_type");
+				String media_url = rs.getString("media_url");
+				int order = rs.getInt("order");
+				int status = rs.getInt("status");
+				Date created_at = rs.getDate("created_at");
+				Date updated_at = rs.getDate("updated_at");
+				ChapterDAO c = new ChapterDAO();
+				Chapter chapter = c.getChapterById(chapter_id);
+				Lecture lecture = new Lecture(lecture_id, chapter, title, content, media_type, media_url, order, status, created_at, updated_at);
+				lectures.add(lecture);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lectures;
+	}
 }

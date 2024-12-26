@@ -92,7 +92,7 @@ public class UpdateLectureServlet extends HttpServlet {
 
             // Đường dẫn lưu file
             // Chỉnh sửa đường dẫn: 
-            uploadPath = "D:/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/filepath/lecture";
+            uploadPath = "C:/Users/ADMIN/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/filepath/lecture";
             //Dương: D:/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/img/user
 		    //Giang: C:/Users/ADMIN/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/img/course
             

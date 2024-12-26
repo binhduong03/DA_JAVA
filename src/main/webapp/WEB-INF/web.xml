@@ -359,4 +359,34 @@
     <servlet-name>CourseProgressServlet</servlet-name>
     <url-pattern>/Admin/course-progress</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CourseDetailServlet</display-name>
+    <servlet-name>CourseDetailServlet</servlet-name>
+    <servlet-class>controller.pages.CourseDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourseDetailServlet</servlet-name>
+    <url-pattern>/course-detail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LectureDetailServlet</display-name>
+    <servlet-name>LectureDetailServlet</servlet-name>
+    <servlet-class>controller.pages.LectureDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LectureDetailServlet</servlet-name>
+    <url-pattern>/lecture-detail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ExerciseDetailServlet</display-name>
+    <servlet-name>ExerciseDetailServlet</servlet-name>
+    <servlet-class>controller.pages.ExerciseDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExerciseDetailServlet</servlet-name>
+    <url-pattern>/exercise-detail</url-pattern>
+  </servlet-mapping>
 </web-app>

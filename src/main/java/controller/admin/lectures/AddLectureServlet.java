@@ -84,7 +84,7 @@ public class AddLectureServlet extends HttpServlet {
             media_url = System.currentTimeMillis() + "_" + filename;
 
            
-            uploadPath = "D:/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/filepath/lecture";
+            uploadPath = "C:/Users/ADMIN/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/filepath/lecture";
             //Dương: D:/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/img/user
 		    //Giang: C:/Users/ADMIN/eclipse-workspace/DA_JAVA/src/main/webapp/public/backend/img/course
             
