@@ -56,9 +56,11 @@ public class AddStudentServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String address = request.getParameter("address");
+		String balance = "0.0";
 		String role = request.getParameter("role");
 		java.sql.Date birthDate = java.sql.Date.valueOf(date_of_birt);
         
+		Double Balance = Double.parseDouble(balance); 
         String avatar = "teacher.jpg"; 
         Part avatarPart = request.getPart("avatar");
         String uploadPath = null;
@@ -83,7 +85,7 @@ public class AddStudentServlet extends HttpServlet {
             avatarPart.write(uploadPath + File.separator + avatar);
         }
 		
-		User user =  new User(0, fullname, username, password, avatar, phone, email, gender, birthDate, address, role, 1, currentDate, currentDate);
+		User user =  new User(0, fullname, username, password, avatar, phone, email, gender, birthDate, address, Balance, role, 1, currentDate, currentDate);
 		us.insert(user);    
 		response.sendRedirect("all-student");
 	}

@@ -24,6 +24,7 @@ public class UserDAO extends DBContext {
 			ResultSet rs = p.executeQuery();
 			int user_id;
 			String fullname, username, password, avatar, phone, email, gender, address, role;
+			Double balance;
 			Date date_of_birt, created_at, updated_at;
 			int status;
 			while(rs.next()) {
@@ -37,11 +38,12 @@ public class UserDAO extends DBContext {
 				gender = rs.getString("gender");
 				date_of_birt = rs.getDate("date_of_birt");
 				address = rs.getString("address");
+				balance = rs.getDouble("balance");
 				role = rs.getString("role");
 				status = rs.getInt("status");
 				created_at = rs.getDate("created_at");
 				updated_at = rs.getDate("updated_at");
-				User u = new User(user_id, fullname, username, password, avatar, phone, email, gender, date_of_birt, address, role, status, created_at, updated_at);
+				User u = new User(user_id, fullname, username, password, avatar, phone, email, gender, date_of_birt, address, balance,  role, status, created_at, updated_at);
 				list.add(u);
 				
 			}
@@ -61,6 +63,7 @@ public class UserDAO extends DBContext {
 			ResultSet rs = ps.executeQuery();
 			int user_id;
 			String fullname, username, password, avatar, phone, email, gender, address, role;
+			Double balance;
 			Date date_of_birt, created_at, updated_at;
 			int status;
 			if(rs.next()) {
@@ -74,11 +77,12 @@ public class UserDAO extends DBContext {
 				gender = rs.getString("gender");
 				date_of_birt = rs.getDate("date_of_birt");
 				address = rs.getString("address");
+				balance = rs.getDouble("balance");
 				role = rs.getString("role");
 				status = rs.getInt("status");
 				created_at = rs.getDate("created_at");
 				updated_at = rs.getDate("updated_at");
-				User u = new User(user_id, fullname, username, password, avatar, phone, email, gender, date_of_birt, address, role, status, created_at, updated_at);
+				User u = new User(user_id, fullname, username, password, avatar, phone, email, gender, date_of_birt, address, balance, role, status, created_at, updated_at);
 				return u;
 			}
 		} catch (Exception e) {
@@ -88,8 +92,8 @@ public class UserDAO extends DBContext {
 	}
 	
 	public void insert(User u) {
-	    String sql = "INSERT INTO `tb_user` (`user_id`, `fullname`, `username`, `password`, `avatar`, `phone`, `email`, `gender`, `date_of_birt`, `address`, `role`, `status`, `created_at`, `updated_at`) "
-	               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    String sql = "INSERT INTO `tb_user` (`user_id`, `fullname`, `username`, `password`, `avatar`, `phone`, `email`, `gender`, `date_of_birt`, `address`, `balance`, `role`, `status`, `created_at`, `updated_at`) "
+	               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    try {
 	    	connection = getConnection();
 	        PreparedStatement ps = connection.prepareStatement(sql);
@@ -104,10 +108,11 @@ public class UserDAO extends DBContext {
 	        ps.setString(8, u.getGender());
 	        ps.setDate(9, new java.sql.Date(u.getDate_of_birt().getTime()));
 	        ps.setString(10, u.getAddress());
-	        ps.setString(11, u.getRole());
-	        ps.setInt(12, u.getStatus());
-	        ps.setDate(13, new java.sql.Date(u.getCreated_at().getTime()));
-	        ps.setDate(14, new java.sql.Date(u.getUpdated_at().getTime()));
+	        ps.setDouble(11, u.getBalance());
+	        ps.setString(12, u.getRole());
+	        ps.setInt(13, u.getStatus());
+	        ps.setDate(14, new java.sql.Date(u.getCreated_at().getTime()));
+	        ps.setDate(15, new java.sql.Date(u.getUpdated_at().getTime()));
 	        ps.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -126,6 +131,7 @@ public class UserDAO extends DBContext {
 		        + "`gender` = '" + u.getGender() + "', "
 		        + "`date_of_birt` = '" + new java.sql.Date(u.getDate_of_birt().getTime()) + "', "
 		        + "`address` = '" + u.getAddress() + "', "
+		        + "`balance` = '" + u.getBalance() + "', "
 		        + "`role` = '" + u.getRole() + "', "
 		        + "`status` = " + u.getStatus() + ", "
 		        + "`created_at` = '" + new java.sql.Date(u.getCreated_at().getTime()) + "', "
@@ -166,6 +172,7 @@ public class UserDAO extends DBContext {
 			ResultSet rs = p.executeQuery();
 			int user_id;
 			String fullname, username, password, avatar, phone, email, gender, address, role;
+			Double balance;
 			Date date_of_birt, created_at, updated_at;
 			int status;
 			while(rs.next()) {
@@ -179,11 +186,12 @@ public class UserDAO extends DBContext {
 				gender = rs.getString("gender");
 				date_of_birt = rs.getDate("date_of_birt");
 				address = rs.getString("address");
+				balance = rs.getDouble("balance");
 				role = rs.getString("role");
 				status = rs.getInt("status");
 				created_at = rs.getDate("created_at");
 				updated_at = rs.getDate("updated_at");
-				User u = new User(user_id, fullname, username, password, avatar, phone, email, gender, date_of_birt, address, role, status, created_at, updated_at);
+				User u = new User(user_id, fullname, username, password, avatar, phone, email, gender, date_of_birt, address, balance, role, status, created_at, updated_at);
 				list.add(u);
 			}
 			p.close();
@@ -193,6 +201,17 @@ public class UserDAO extends DBContext {
 		return list;
 		
 	}
-
+	public boolean updateBalance(int userId, double newBalance) {
+        String sql = "UPDATE `tb_user` SET balance = ? WHERE user_id = ?";
+        try (Connection connection = DBContext.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setDouble(1, newBalance);
+            ps.setInt(2, userId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

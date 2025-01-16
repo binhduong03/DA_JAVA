@@ -6,14 +6,13 @@ public class Carts {
 	private int cart_id;
 	private User user;
 	private Course course;
-	private int status;
+	private String status;
 	private Date created_at;
 	private Date updated_at;
 	public Carts() {
 		
 	}
-	public Carts(int cart_id, User user, Course course, int status, Date created_at, Date updated_at) {
-		
+	public Carts(int cart_id, User user, Course course, String status, Date created_at, Date updated_at) {
 		this.cart_id = cart_id;
 		this.user = user;
 		this.course = course;
@@ -39,10 +38,10 @@ public class Carts {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public Date getCreated_at() {
@@ -62,13 +61,5 @@ public class Carts {
 		return "Carts [cart_id=" + cart_id + ", user=" + user + ", course=" + course + ", status=" + status
 				+ ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

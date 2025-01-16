@@ -16,7 +16,7 @@ public class AuthDAO extends DBContext{
 			p.setString(2, password);
 			ResultSet rs = p.executeQuery();
 			if(rs.next()) {
-				User u = new User(rs.getInt("user_id"), rs.getString("fullname"), rs.getString("username"), rs.getString("password"), rs.getString("avatar"), rs.getString("phone"), rs.getString("email"), rs.getString("gender"), rs.getDate("date_of_birt"), rs.getString("address"), rs.getString("role"), rs.getInt("status"), rs.getDate("created_at"), rs.getDate("updated_at"));
+				User u = new User(rs.getInt("user_id"), rs.getString("fullname"), rs.getString("username"), rs.getString("password"), rs.getString("avatar"), rs.getString("phone"), rs.getString("email"), rs.getString("gender"), rs.getDate("date_of_birt"), rs.getString("address"), rs.getDouble("balance"), rs.getString("role"), rs.getInt("status"), rs.getDate("created_at"), rs.getDate("updated_at"));
 				return u;
 			}
 		} catch (Exception e) {

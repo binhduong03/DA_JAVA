@@ -63,11 +63,13 @@ public class UpdateTeacherServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String address = request.getParameter("address");
+		String balance = "0.0";
 		String role = request.getParameter("role");
 		java.sql.Date birthDate = java.sql.Date.valueOf(date_of_birt);
 		String status = request.getParameter("status");
 		int statusBoolean = "1".equals(status) ? 1 : 0;
 		int id = Integer.parseInt(id_s);
+		Double Balance = Double.parseDouble(balance);
 		Part avatarPart = request.getPart("avatar");
 		String avatar = null;
 		String uploadPath = null;
@@ -93,7 +95,7 @@ public class UpdateTeacherServlet extends HttpServlet {
 		
 		System.out.println(statusBoolean);
 		
-		User u = new User(id, fullname, username, password, avatar, phone, email, gender, birthDate, address, role, statusBoolean, currentDate, currentDate);
+		User u = new User(id, fullname, username, password, avatar, phone, email, gender, birthDate, address, Balance, role, statusBoolean, currentDate, currentDate);
 		us.update(u);
 		response.sendRedirect("all-teacher");
 	}

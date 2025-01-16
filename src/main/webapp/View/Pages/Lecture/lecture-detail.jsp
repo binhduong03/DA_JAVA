@@ -32,17 +32,16 @@
 	<div class="container-fluid p-3">
 		<div class="row">
 			<div class="col-lg-9">
-			<h1 align="center">Bài giảng</h1>
 			    <c:choose>
 			        <c:when test="${not empty lecture}">
-			            <h2>${lecture.title}</h2>
-			            <p>${lecture.content}</p>
 			            <c:choose>
 			                <c:when test="${lecture.media_type == 'VIDEO'}">
 			                    <video width="100%" height="600" controls>
 			                        <source src="${pageContext.request.contextPath}/public/backend/filepath/lecture/${lecture.media_url}" type="video/mp4">
 			                        Trình duyệt của bạn không hỗ trợ video.
 			                    </video>
+			                    <h2>${lecture.title}</h2>
+			            		<p>${lecture.content}</p>
 			                </c:when>
 			                <c:when test="${lecture.media_type == 'file'}">
 			                    <a href="${lecture.media_url}" download>Tải xuống tệp</a>

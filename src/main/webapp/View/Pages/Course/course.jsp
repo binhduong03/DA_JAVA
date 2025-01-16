@@ -16,9 +16,13 @@
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="${pageContext.request.contextPath}/public/backend/img/course/${course.image}" alt=""  style="object-fit: cover; width: 100%; height: 200px;">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a  href="course-detail?id=${course.course_id }" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Đọc thêm</a>
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Đăng ký ngay</a>
-                            </div>
+							    <a href="course-detail?id=${course.course_id}" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Đọc thêm</a>
+							    <form action="cart" method="post" style="display: inline;">
+							        <input type="hidden" name="action" value="add">
+							        <input type="hidden" name="courseId" value="${course.course_id}">
+							        <button type="submit" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Thêm vào giỏ hàng</button>
+							    </form>
+							</div>
                         </div>
                         <div class="text-center p-4 pb-0">
                             <h3 class="mb-0">${course.price}</h3>

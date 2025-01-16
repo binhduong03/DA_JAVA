@@ -55,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
 		UserDAO user = new UserDAO();
 		//kiểm tra điều kiện
 		
-		User u = new User(0, fullname, username, password, "student.jpg", null, email, null, birthDate, null, "student", 1, currentDate, currentDate);
+		User u = new User(0, fullname, username, password, "student.jpg", null, email, null, birthDate, null, 0.0, "student", 1, currentDate, currentDate);
 		user.insert(u);
 		response.sendRedirect("login");
 		

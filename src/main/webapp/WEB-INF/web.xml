@@ -389,4 +389,24 @@
     <servlet-name>ExerciseDetailServlet</servlet-name>
     <url-pattern>/exercise-detail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>WalletServlet</display-name>
+    <servlet-name>WalletServlet</servlet-name>
+    <servlet-class>controller.admin.user.WalletServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WalletServlet</servlet-name>
+    <url-pattern>/wallet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartServlet</display-name>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>controller.pages.CartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
 </web-app>

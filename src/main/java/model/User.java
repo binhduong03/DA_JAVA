@@ -13,6 +13,7 @@ public class User {
 	private String gender;
 	private Date date_of_birt;
 	private String address;
+	private Double balance;
 	private String role;
 	private int status;
 	private Date created_at;
@@ -22,9 +23,8 @@ public class User {
 	}
 
 	public User(int user_id, String fullname, String username, String password, String avatar, String phone,
-			String email, String gender, Date date_of_birt, String address, String role, int status,
+			String email, String gender, Date date_of_birt, String address, Double balance, String role, int status,
 			Date created_at, Date updated_at) {
-	
 		this.user_id = user_id;
 		this.fullname = fullname;
 		this.username = username;
@@ -35,6 +35,7 @@ public class User {
 		this.gender = gender;
 		this.date_of_birt = date_of_birt;
 		this.address = address;
+		this.balance = balance;
 		this.role = role;
 		this.status = status;
 		this.created_at = created_at;
@@ -121,6 +122,14 @@ public class User {
 		this.address = address;
 	}
 
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
 	public String getRole() {
 		return role;
 	}
@@ -157,8 +166,9 @@ public class User {
 	public String toString() {
 		return "User [user_id=" + user_id + ", fullname=" + fullname + ", username=" + username + ", password="
 				+ password + ", avatar=" + avatar + ", phone=" + phone + ", email=" + email + ", gender=" + gender
-				+ ", date_of_birt=" + date_of_birt + ", address=" + address + ", role=" + role + ", status=" + status
-				+ ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
+				+ ", date_of_birt=" + date_of_birt + ", address=" + address + ", balance=" + balance + ", role=" + role
+				+ ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
 	}
+
 	
 }
